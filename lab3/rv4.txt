@@ -1,0 +1,3 @@
+A* algoritam
+
+17. Napisati funkciju koja na osnovu zadatog težinskog neusmerenog grafa i zadatog (ciljnog) čvora G formira neusmereni težinski graf sa heuristikom. Heuristika proizvoljnog čvora C se određuje kao dužina puta od čvora C do čvora G.
