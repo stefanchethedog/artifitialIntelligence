@@ -1,0 +1,4 @@
+Resavanje sudoka uspomoc MVR i FC Backtracking-om. 
+
+Domeni ce biti vrednosti dostupne jednom polju. Dakle matrica nizova dostupnih vrednosti.
+Funkcija za uklanjanje vrednosti iz domena odmah na pocetku za zadati sudoku, i kasnije za uklanjanje vrednosti koje ce da se stavljaju na polja
