@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from typing import List, Dict
-
+from sys import argv
 
 def find_len(lista: List) -> int:
 
@@ -22,32 +22,24 @@ def remove_attacking_squares(
     size - size of the board, \n
     copy_row_domains - current domains (available positions in each row), '-' if unavailable
     """
+    i1 = lastAddedRow - lastAddedColumn
+    i2 = lastAddedRow + lastAddedColumn
 
-    for i in range(0, lastAddedRow):
-        copy_row_domains[i][lastAddedColumn] = "-"
-    for i in range(lastAddedRow, size):
-        copy_row_domains[i][lastAddedColumn] = "-"
+    for i in range(0,size):
+        copy_row_domains[i][lastAddedColumn] = '-' # column '-'
 
-    for j in range(0, lastAddedColumn):
-        if j != lastAddedColumn:
-            copy_row_domains[lastAddedRow][j] = "-"
-    for j in range(lastAddedColumn, size):
-        if j != lastAddedColumn:
-            copy_row_domains[lastAddedRow][j] = "-"
-
-    i = lastAddedRow - lastAddedColumn
-    for j in range(0, size):
-        if i >= 0 and i < size:
-            if i != lastAddedRow:
-                copy_row_domains[i][j] = "-"
-        i += 1
-    i = lastAddedRow + lastAddedColumn
-    for j in range(0, size):
-        if i >= 0 and i < size:
-            if i != lastAddedRow:
-                copy_row_domains[i][j] = "-"
-        i -= 1
-
+        if i != lastAddedColumn:
+            copy_row_domains[lastAddedRow][i] = '-' # row '-'
+        
+        if i1>=0 and i1 < size:
+            if i1!= lastAddedRow:
+                copy_row_domains[i1][i] = '-'
+        i1+=1
+        
+        if i2>=0 and i2 < size:
+            if i2 != lastAddedRow:
+                copy_row_domains[i2][i] = '-'
+        i2-=1
 
 def find_most_constrained_row(size, copy_row_domains) -> int:
 
@@ -119,7 +111,7 @@ def csp_solve_recursive(n, rows, rowDomains, lastAddedRow, paths, path):
 
     currentPath = path.copy()
 
-    # is this a valid forward checking?
+    # is this a valid forward checking method?
     if find_len(copy_row_domains[mostConstrainedRow]) == 0:
         return [] if len(currentPath) < n else currentPath
 
@@ -138,5 +130,7 @@ def csp_solve_recursive(n, rows, rowDomains, lastAddedRow, paths, path):
             paths.pop()
         currentPath.pop()
 
+if len(argv) > 1:
+    n = int(argv[1]) or 8
 
-csp_solve(8)
+csp_solve(n)
